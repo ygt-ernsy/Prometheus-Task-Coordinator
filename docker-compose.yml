@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  prometheus-task:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prometheus-task-manager
+    image: prometheus-task:1.0
+
+    tty: true
+    
+    environment:
+      - ROS_DISTRO=humble
+      - PYTHONUNBUFFERED=1
+    
+    volumes:
+      - ./prometheus_task:/app/prometheus_task
+      - ./test_output:/app/test_output
+    
+    networks:
+      - prometheus-network
+    
+    restart: unless-stopped
+
+networks:
+  prometheus-network:
+    driver: bridge
