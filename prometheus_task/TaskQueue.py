@@ -8,7 +8,7 @@ class TaskQueue:
 
     def enqueue(self, task : Task):
         self.task_queue.append(task)
-        self.task_queue.sort()
+        self.task_queue.sort(reverse=True)
 
     def pop(self):
         if len(self.task_queue) == 0:
